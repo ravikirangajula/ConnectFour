@@ -41,6 +41,10 @@ class PlayerColour: UIView {
         roundView.clipsToBounds = true
 
     }
+    
+    func setUPUI(color:UIColor) {
+        roundView.backgroundColor = color
+    }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

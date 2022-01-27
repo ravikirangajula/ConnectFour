@@ -9,15 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let nameView: PlayerNameView = {
-        let vie = PlayerNameView()
-        vie.translatesAutoresizingMaskIntoConstraints = false
-        return vie
+    lazy var viewModel: MainViewModel = { [weak self] in
+        return MainViewModel()
     }()
     
     let stackView: UIStackView = {
         let view = UIStackView()
-       // view.backgroundColor = .red
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.spacing = 10
@@ -32,20 +29,32 @@ class ViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor.white
         collection.isScrollEnabled = true
+        collection.isUserInteractionEnabled = true
+        collection.allowsMultipleSelection = true
         return collection
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = MainViewModel()
+        viewModel.setCurrentPlayer()
+        setUpUI()
+        initliseComponents()
+        addViewsToStack()
+    }
+    
+    func setUpUI() {
         self.view.backgroundColor = .white
         self.view.addSubview(stackView)
         self.view.addSubview(connectFourCollectionView)
+        setupCollection()
+        baseStackView()
+    }
+    
+    func initliseComponents() {
         connectFourCollectionView.delegate = self
         connectFourCollectionView.dataSource = self
         connectFourCollectionView.register(ConnectFourCollectionViewCell.self, forCellWithReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier)
-        setupCollection()
-        baseStackView()
-        addViewsToStack()
     }
     
     func setupCollection(){
@@ -54,15 +63,6 @@ class ViewController: UIViewController {
             connectFourCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             connectFourCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             connectFourCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
-        ])
-    }
-    
-    func playnerName(){
-        NSLayoutConstraint.activate([
-            nameView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            nameView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
-            nameView.heightAnchor.constraint(equalToConstant: 200),
-            nameView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1)
         ])
     }
     
@@ -77,30 +77,35 @@ class ViewController: UIViewController {
     
     func addViewsToStack() {
         let playerOneColor = PlayerColour()
+        playerOneColor.setUPUI(color: UtilityClass.hexStringToUIColor(hex: viewModel.playerOneColor()))
         stackView.insertArrangedSubview(playerOneColor, at: 0)
         
         let playerOneName = PlayerNameView()
+        playerOneName.setUpUI(name: viewModel.getFirstPlayerName())
         stackView.insertArrangedSubview(playerOneName, at: 1)
-       
+        
         let paddingView = UIView()
         stackView.insertArrangedSubview(paddingView, at: 2)
-
+        
         //Reset Button
         let bgView = ResetButton()
         stackView.insertArrangedSubview(bgView, at: 3)
-
+        
         let paddingView2 = UIView()
         stackView.insertArrangedSubview(paddingView2, at: 4)
-               
+        
         let playerTwoName = PlayerNameView()
+        playerTwoName.setUpUI(name: viewModel.getSecondPlayerName())
         stackView.insertArrangedSubview(playerTwoName, at: 5)
         
         let playerTwoColor = PlayerColour()
+        playerTwoColor.setUPUI(color: UtilityClass.hexStringToUIColor(hex: viewModel.playerTwoColor()))
+        
         stackView.insertArrangedSubview(playerTwoColor, at: 6)
         
         stackView.reloadInputViews()
     }
-
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -114,7 +119,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier, for: indexPath) as? ConnectFourCollectionViewCell else { return UICollectionViewCell() }
-       
+        cell.setUpCell()
         return cell
     }
     
@@ -128,11 +133,28 @@ extension ViewController: UICollectionViewDataSource {
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     
-    
 }
 
 extension ViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.setCurrentPlayer()
+        collectionView.deselectItem(at: indexPath, animated: false)
+        viewModel.setSelectedItem(indexPath: indexPath)
+        collectionView.selectItem(at: viewModel.getIndexToStore(indexPath: indexPath), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
+        guard let cell = connectFourCollectionView.cellForItem(at: viewModel.getIndexToStore(indexPath: indexPath)) as? ConnectFourCollectionViewCell else { return }
+        cell.setUpCell(color: viewModel.selectedPlayerColor())
+    }
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let selectedItems = connectFourCollectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
+            return false
+        }
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        return viewModel.canSelectItemAtIndex(indexPath: indexPath)
+    }
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {

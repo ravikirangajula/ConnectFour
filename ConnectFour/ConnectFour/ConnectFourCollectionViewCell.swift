@@ -14,13 +14,14 @@ class ConnectFourCollectionViewCell: UICollectionViewCell {
     lazy var circleView: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isUserInteractionEnabled = true
         return button
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-       // self.backgroundColor = .yellow
         self.addSubview(circleView)
+        self.contentView.isUserInteractionEnabled = true
         setupCollection()
         layoutIfNeeded()
         roundButton()
@@ -37,6 +38,10 @@ class ConnectFourCollectionViewCell: UICollectionViewCell {
         circleView.backgroundColor = .blue
         circleView.layer.masksToBounds = true
         circleView.layer.cornerRadius = circleView.frame.size.width/2
+    }
+
+    func setUpCell(color:UIColor = .cyan) {
+        circleView.backgroundColor = color
     }
     
     required init?(coder aDecoder: NSCoder) {

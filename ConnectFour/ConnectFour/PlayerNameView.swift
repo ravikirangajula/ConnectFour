@@ -8,7 +8,7 @@
 import UIKit
 
 class PlayerNameView: UIView {
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
@@ -16,7 +16,7 @@ class PlayerNameView: UIView {
         label.text = "Satya"
         return label
     }()
-    let statusLabel: UILabel = {
+    private let statusLabel: UILabel = {
         let label = UILabel()
         //label.backgroundColor = .clear
         label.textAlignment = .center
@@ -26,7 +26,7 @@ class PlayerNameView: UIView {
         return label
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let view = UIStackView()
         //view.backgroundColor = .yellow
         view.frame = CGRect(x: 0, y: 0, width: 250, height: 200)
@@ -37,7 +37,6 @@ class PlayerNameView: UIView {
         return view
     }()
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(stackView)
@@ -47,7 +46,7 @@ class PlayerNameView: UIView {
         stackView.reloadInputViews()
     }
     
-    func baseStackView(){
+    private func baseStackView(){
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
             stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
@@ -58,6 +57,11 @@ class PlayerNameView: UIView {
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUpUI(name:String) {
+        self.nameLabel.text = name
+        self.statusLabel.isHidden = true
     }
 
 }

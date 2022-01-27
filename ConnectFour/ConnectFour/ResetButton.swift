@@ -10,14 +10,15 @@ import UIKit
 class ResetButton: UIView {
     
     let roundView: UIButton = {
-        let view = UIButton()
-        view.setTitle("RESET", for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        view.setTitleColor(.red, for: .normal)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightGray
-        view.clipsToBounds = true
-        return view
+        let button = UIButton()
+        button.setTitle("RESET", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        button.setTitleColor(.red, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .lightGray
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(resetAll), for: .touchUpInside)
+        return button
     }()
 
     override init(frame: CGRect) {
@@ -29,7 +30,11 @@ class ResetButton: UIView {
         super.layoutSubviews()
         roundButton()
     }
-
+    
+    @objc func resetAll() {
+        
+    }
+    
     func setUpView() {
         roundView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
         roundView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
@@ -38,10 +43,9 @@ class ResetButton: UIView {
     }
     
     func roundButton() {
-        roundView.layoutIfNeeded()
-        self.layoutIfNeeded()
+        //roundView.layoutIfNeeded()
+       // self.layoutIfNeeded()
         roundView.layer.cornerRadius = roundView.frame.size.width/2
-        roundView.clipsToBounds = true
 
     }
 
