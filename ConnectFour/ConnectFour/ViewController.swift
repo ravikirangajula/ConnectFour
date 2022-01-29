@@ -103,6 +103,10 @@ class ViewController: UIViewController {
         
         //Reset Button
         let bgView = ResetButton()
+        bgView.tapOnReset = { [weak self] in
+            self?.viewModel.selectedItems.removeAll()
+            self?.connectFourCollectionView.reloadData()
+        }
         stackView.insertArrangedSubview(bgView, at: 3)
         
         let paddingView2 = UIView()

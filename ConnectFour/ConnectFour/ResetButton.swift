@@ -9,6 +9,8 @@ import UIKit
 
 class ResetButton: UIView {
     
+    var tapOnReset:(() -> ())?
+
     let roundView: UIButton = {
         let button = UIButton()
         button.setTitle("RESET", for: .normal)
@@ -32,7 +34,7 @@ class ResetButton: UIView {
     }
     
     @objc func resetAll() {
-        
+        tapOnReset?()
     }
     
     func setUpView() {

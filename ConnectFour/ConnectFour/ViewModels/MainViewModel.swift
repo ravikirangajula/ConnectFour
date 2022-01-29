@@ -64,6 +64,41 @@ extension MainViewModel {
         selectedItems.append(playerObj)
         genreralALgo(selectedSection: indexPath, isVertical: true)
         genreralALgo(selectedSection: indexPath, isVertical: false)
+        generateDiagonalArray(selectedSection: indexPath)
+        generateLeftDiagonalArray(selectedSection: indexPath)
+    }
+    
+    func generateDiagonalArray(selectedSection:IndexPath) {
+        var number:[[GamePattern]] = []
+        for i in 0...selectedSection.section {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
+            number.append(coulm)
+        }
+        print("number == \(number)")
+        var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 } ?? []
+        var intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+        print("intArray == \(intArray1)")
+        if intArray1.count > 3 {
+            if get4Concctivearray(inputArray: intArray1).count > 3 {
+                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+            }
+        }
+    }
+    func generateLeftDiagonalArray(selectedSection:IndexPath) {
+        var number:[[GamePattern]] = []
+        for i in 0...selectedSection.section {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
+            number.append(coulm)
+        }
+        print("number == \(number)")
+        var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 } ?? []
+        var intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+        print("intArray == \(intArray1)")
+        if intArray1.count > 3 {
+            if get4Concctivearray(inputArray: intArray1).count > 3 {
+                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+            }
+        }
     }
     
     func genreralALgo(selectedSection:IndexPath, isVertical:Bool) {
@@ -76,24 +111,17 @@ extension MainViewModel {
             number = selectedItems.filter({$0.indexPath.row == selectedSection.row}).filter({$0.player == currentPlayer})
             intArray1 = number.map({$0.indexPath.section}).sorted(by: {$0 < $1})
         }
-        
         if intArray1.count > 3 {
             if get4Concctivearray(inputArray: intArray1).count > 3 {
                 isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
             }
         }
-        
-        
     }
     
     func get4Concctivearray(inputArray:[Int]) -> [Int] {
-        
         let indexSet = IndexSet(inputArray)
-        
         let rangeView = indexSet.rangeView
-        
         let newNumbersArray = rangeView.map { Array($0.indices) }
-        
         var arra:[Int] = []
         for item in newNumbersArray {
             if item.count > 3 {
@@ -108,40 +136,6 @@ extension MainViewModel {
             sendGameOverMessage?("Game Over Dude")
         }
     }
-    
-    //    func verticalRowAlgo(selectedSection:IndexPath) {
-    //        let selectedSectionItems = selectedItems.filter({$0.indexPath.section == selectedSection.section})
-    //        if selectedSectionItems.count > 3 {
-    //            let player1Items = selectedSectionItems.filter({$0.player == currentPlayer}).sorted(by: {$0.indexPath < $1.indexPath})
-    //            let intArray1:[Int] = player1Items.map({$0.indexPath.row})
-    //            if intArray1.map { $0 - 1 }.dropFirst() == intArray1.dropLast() {
-    //                sendGameOverMessage?("Game Over Dude")
-    //            }
-    //        }
-    //    }
-    
-    //    func horizontalAlgo(selectedSection:IndexPath) {
-    //        print("items List in Player1 == \(selectedItems)")
-    //        let number = selectedItems.filter({$0.indexPath.row == selectedSection.row}).filter({$0.player == currentPlayer})
-    //        let intArray1:[Int] = number.map({$0.indexPath.section}).sorted(by: {$0 < $1})
-    //        if intArray1.count > 4 {
-    //            let subarr0 = intArray1[intArray1.count - 4..<intArray1.count] // ArraySlice<Info>
-    //            print("intArray1 == \(intArray1)")
-    //            if subarr0.count > 3 {
-    //                if subarr0.map { $0 - 1 }.dropFirst() == subarr0.dropLast() {
-    //                    sendGameOverMessage?("Game Over Dude")
-    //                }
-    //            }
-    //        } else {
-    //            if intArray1.count > 3 {
-    //                if intArray1.map { $0 - 1 }.dropFirst() == intArray1.dropLast() {
-    //                    sendGameOverMessage?("Game Over Dude")
-    //                }
-    //            }
-    //        }
-    //
-    //    }
-    
     
     func getSelectedItemsCOunt(indexPath:IndexPath) -> Int {
         let items = selectedItems.filter({$0.indexPath.section == indexPath.section})
