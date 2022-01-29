@@ -7,17 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9FEDB705-2CE4-4FDA-BF9A-0E1BFB87562D"
+            uuid = "B30CD555-0256-486C-8CE7-69AB866AFF13"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ConnectFour/ViewController.swift"
+            filePath = "ConnectFour/ViewModels/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "collectionView(_:shouldSelectItemAt:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "genreralALgo(selectedSection:isVertical:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B30CD555-0256-486C-8CE7-69AB866AFF13 - 34ac9b69866b046"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ConnectFour.MainViewModel.genreralALgo(selectedSection: Foundation.IndexPath, isVertical: Swift.Bool) -&gt; ()"
+                  moduleName = "ConnectFour"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ravikiran/ConnectFourApp/ConnectFour/ConnectFour/ConnectFour/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "905">
+               </Location>
+               <Location
+                  uuid = "B30CD555-0256-486C-8CE7-69AB866AFF13 - 168d0ba84e5fd19c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (ConnectFour.GamePattern) -&gt; Swift.Int in ConnectFour.MainViewModel.genreralALgo(selectedSection: Foundation.IndexPath, isVertical: Swift.Bool) -&gt; ()"
+                  moduleName = "ConnectFour"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ravikiran/ConnectFourApp/ConnectFour/ConnectFour/ConnectFour/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "B30CD555-0256-486C-8CE7-69AB866AFF13 - ca4ffdc60fdd9732"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Int, Swift.Int) -&gt; Swift.Bool in ConnectFour.MainViewModel.genreralALgo(selectedSection: Foundation.IndexPath, isVertical: Swift.Bool) -&gt; ()"
+                  moduleName = "ConnectFour"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ravikiran/ConnectFourApp/ConnectFour/ConnectFour/ConnectFour/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

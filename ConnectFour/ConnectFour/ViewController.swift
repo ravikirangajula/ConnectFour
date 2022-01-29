@@ -43,6 +43,20 @@ class ViewController: UIViewController {
         addViewsToStack()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.sendGameOverMessage = { [weak self] message in
+            let alreatCOnr = UIAlertController(title: "Congratulation!!!", message: message, preferredStyle: .alert)
+            alreatCOnr.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                //print("default")
+                self?.viewModel.selectedItems.removeAll()
+                self?.connectFourCollectionView.reloadData()
+            }))
+            self?.present(alreatCOnr, animated: true, completion: nil)
+        }
+        
+    }
+    
     func setUpUI() {
         self.view.backgroundColor = .white
         self.view.addSubview(stackView)
@@ -139,7 +153,7 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.setCurrentPlayer()
         collectionView.deselectItem(at: indexPath, animated: false)
-        viewModel.setSelectedItem(indexPath: indexPath)
+        viewModel.setSelectedItem(indexPath: viewModel.getIndexToStore(indexPath: indexPath))
         collectionView.selectItem(at: viewModel.getIndexToStore(indexPath: indexPath), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
         guard let cell = connectFourCollectionView.cellForItem(at: viewModel.getIndexToStore(indexPath: indexPath)) as? ConnectFourCollectionViewCell else { return }
         cell.setUpCell(color: viewModel.selectedPlayerColor())
