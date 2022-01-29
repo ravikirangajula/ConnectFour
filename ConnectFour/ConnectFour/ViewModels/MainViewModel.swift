@@ -66,6 +66,7 @@ extension MainViewModel {
         genreralALgo(selectedSection: indexPath, isVertical: false)
         generateDiagonalArray(selectedSection: indexPath)
         generateLeftDiagonalArray(selectedSection: indexPath)
+        generateTopToBottomDiagonalArray(selectedSection: indexPath)
     }
     
     func generateDiagonalArray(selectedSection:IndexPath) {
@@ -84,16 +85,33 @@ extension MainViewModel {
             }
         }
     }
-    func generateLeftDiagonalArray(selectedSection:IndexPath) {
+    func generateTopToBottomDiagonalArray(selectedSection:IndexPath) {
         var number:[[GamePattern]] = []
         for i in 0...selectedSection.section {
-            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
             number.append(coulm)
         }
         print("number == \(number)")
         var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 } ?? []
         var intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
         print("intArray == \(intArray1)")
+        if intArray1.count > 3 {
+            if get4Concctivearray(inputArray: intArray1).count > 3 {
+                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+            }
+        }
+    }
+    
+    func generateLeftDiagonalArray(selectedSection:IndexPath) {
+        var number:[[GamePattern]] = []
+        for i in 0...(7 - selectedSection.section) {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
+            number.append(coulm)
+        }
+        print("number == \(number)")
+        var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 }
+        let intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+        print("generateLeftDiagonalArray intArray == \(intArray1)")
         if intArray1.count > 3 {
             if get4Concctivearray(inputArray: intArray1).count > 3 {
                 isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
