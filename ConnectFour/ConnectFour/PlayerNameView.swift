@@ -13,7 +13,6 @@ class PlayerNameView: UIView {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "Satya"
         return label
     }()
     private let statusLabel: UILabel = {

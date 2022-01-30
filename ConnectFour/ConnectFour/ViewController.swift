@@ -13,6 +13,8 @@ class ViewController: UIViewController {
         return MainViewModel()
     }()
     
+    var dataSource: ConnectFourCollectionDataSource?
+    
     let stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -37,6 +39,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = MainViewModel()
+        dataSource = ConnectFourCollectionDataSource(model: viewModel)
         viewModel.setCurrentPlayer()
         setUpUI()
         initliseComponents()
@@ -66,7 +69,7 @@ class ViewController: UIViewController {
     
     func initliseComponents() {
         connectFourCollectionView.delegate = self
-        connectFourCollectionView.dataSource = self
+        connectFourCollectionView.dataSource = dataSource
         connectFourCollectionView.register(ConnectFourCollectionViewCell.self, forCellWithReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier)
     }
     
@@ -125,32 +128,32 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier, for: indexPath) as? ConnectFourCollectionViewCell else { return UICollectionViewCell() }
-        cell.setUpCell()
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = (self.connectFourCollectionView.frame.size.height/6) - 30
-        let width = (self.connectFourCollectionView.frame.size.width/7) - 10
-        return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-    }
-    
-}
+//extension ViewController: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 6
+//    }
+//
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 7
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier, for: indexPath) as? ConnectFourCollectionViewCell else { return UICollectionViewCell() }
+//        cell.setUpCell()
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let height = (self.connectFourCollectionView.frame.size.height/6) - 30
+//        let width = (self.connectFourCollectionView.frame.size.width/7) - 10
+//        return CGSize(width: width, height: height)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//    }
+//
+//}
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -175,5 +178,13 @@ extension ViewController: UICollectionViewDelegate {
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = (self.connectFourCollectionView.frame.size.height/6) - 30
+        let width = (self.connectFourCollectionView.frame.size.width/7) - 10
+        return CGSize(width: width, height: height)
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
 }
