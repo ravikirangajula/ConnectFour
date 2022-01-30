@@ -46,9 +46,8 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.sendGameOverMessage = { [weak self] message in
-            let alreatCOnr = UIAlertController(title: "Congratulation!!!", message: message, preferredStyle: .alert)
-            alreatCOnr.addAction(UIAlertAction(title: "Restart Game", style: .default, handler: { action in
-                //print("default")
+            let alreatCOnr = UIAlertController(title: ConnectFourConstants.ALERT_TITLE, message: message, preferredStyle: .alert)
+            alreatCOnr.addAction(UIAlertAction(title: ConnectFourConstants.ALERT_BUTTON_TITLE, style: .default, handler: { [weak self] action in
                 self?.viewModel.selectedItems.removeAll()
                 self?.connectFourCollectionView.reloadData()
             }))
