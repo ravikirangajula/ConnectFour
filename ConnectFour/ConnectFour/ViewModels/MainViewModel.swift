@@ -15,6 +15,10 @@ class MainViewModel: NSObject {
     
     var sendGameOverMessage:((_ message:String) -> ())?
     
+    var connectFourAlgorithmModel: ConnectFourAlgorithm = {
+        return ConnectFourAlgorithm()
+    }()
+    
     private var resObject: [JsonModel]?
     var currentPlayer:Player = .player1
     var selectedItems:[GamePattern] = []
@@ -62,79 +66,16 @@ extension MainViewModel {
     func setSelectedItem(indexPath:IndexPath)  {
         let playerObj = GamePattern(player: currentPlayer, indexPath: indexPath)
         selectedItems.append(playerObj)
-        genreralALgo(selectedSection: indexPath, isVertical: true)
-        genreralALgo(selectedSection: indexPath, isVertical: false)
-        generateCommonDiagonalArray(selectedSection: indexPath)
-//        generateDiagonalArray(selectedSection: indexPath)
-//        generateLeftDiagonalArray(selectedSection: indexPath)
-//        generateTopToBottomDiagonalArray(selectedSection: indexPath)
-    }
-    
-    func generateCommonDiagonalArray(selectedSection:IndexPath) {
-        var leftnumber:[[GamePattern]] = []
-        var rightnumber:[[GamePattern]] = []
-
-        let totalRows = 6
-        let totalSections = 7
-        var remainingRows = totalRows - selectedSection.row
-        var remainingSections = totalSections - selectedSection.section
- 
         
-        //bottomleft
-        if remainingRows != 0 {
-        for i in 0...remainingRows {
-            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
-            leftnumber.append(coulm)
+        //check for verticalArray
+        if connectFourAlgorithmModel.generateVerticalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
+            sendGameOverMessage?("Winner is \(currentPlayer)")
+        } else if connectFourAlgorithmModel.generateHorizontalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
+            sendGameOverMessage?("Winner is \(currentPlayer)")
+        } else if connectFourAlgorithmModel.generateDiagonalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) == true {
+            sendGameOverMessage?("Winner is \(currentPlayer)")
         }
-        }
-        //topLeft
-        if remainingSections != totalSections {
-            remainingSections = remainingSections == 0 ? totalSections : remainingSections
-            for i in 0...(remainingSections + 1) {
-                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
-                leftnumber.append(coulm)
-            }
-            
-        }
-        
-        //bottomright
-        for i in 0...remainingRows {
-            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
-            rightnumber.append(coulm)
-        }
-        
-        //topRight
-        if remainingSections != totalSections {
-            remainingSections = remainingSections == 0 ? totalSections : remainingSections
-            for i in 0...remainingSections {
-                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
-                rightnumber.append(coulm)
-            }
-            
-        }
-        print("number == \(leftnumber)")
-        print("number == \(rightnumber)")
-
-        var arr:[GamePattern] = leftnumber.flatMap { $0 }.compactMap{ $0 }
-        let intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
-        print("intArray == \(intArray1)")
-        
-        var rightArr:[GamePattern] = rightnumber.flatMap { $0 }.compactMap{ $0 }
-        let rightIntArray1:[Int] = rightArr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
-        print("rightIntArray1 == \(rightIntArray1)")
-        
-        
-        if intArray1.count > 3 {
-            if get4Concctivearray(inputArray: intArray1).count > 3 {
-                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
-            }
-        }
-        
-        if rightIntArray1.count > 3 {
-            if get4Concctivearray(inputArray: rightIntArray1).count > 3 {
-                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: rightIntArray1))
-            }
-        }
+       // genreralALgo(selectedSection: indexPath, isVertical: false)
 
     }
     
@@ -170,6 +111,107 @@ extension MainViewModel {
             }
         }
     }
+    
+//    func generateCommonDiagonalArray(selectedSection:IndexPath) {
+//        var leftnumber:[[GamePattern]] = []
+//        var rightnumber:[[GamePattern]] = []
+//
+//        let totalRows = 6
+//        let totalSections = 7
+//        var remainingRows = totalRows - selectedSection.row
+//        var remainingSections = totalSections - selectedSection.section
+//
+//
+//        //bottomleft
+//        if remainingRows != 0 {
+//        for i in 0...remainingRows {
+//            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
+//            leftnumber.append(coulm)
+//        }
+//        }
+//        //topLeft
+//        if remainingSections != totalSections {
+//            remainingSections = remainingSections == 0 ? totalSections : remainingSections
+//            for i in 0...(remainingSections + 1) {
+//                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
+//                leftnumber.append(coulm)
+//            }
+//
+//        }
+//
+//        //bottomright
+//        for i in 0...remainingRows {
+//            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
+//            rightnumber.append(coulm)
+//        }
+//
+//        //topRight
+//        if remainingSections != totalSections {
+//            remainingSections = remainingSections == 0 ? totalSections : remainingSections
+//            for i in 0...remainingSections {
+//                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
+//                rightnumber.append(coulm)
+//            }
+//
+//        }
+//        print("number == \(leftnumber)")
+//        print("number == \(rightnumber)")
+//
+//        var arr:[GamePattern] = leftnumber.flatMap { $0 }.compactMap{ $0 }
+//        let intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+//        print("intArray == \(intArray1)")
+//
+//        var rightArr:[GamePattern] = rightnumber.flatMap { $0 }.compactMap{ $0 }
+//        let rightIntArray1:[Int] = rightArr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+//        print("rightIntArray1 == \(rightIntArray1)")
+//
+//
+//        if intArray1.count > 3 {
+//            if get4Concctivearray(inputArray: intArray1).count > 3 {
+//                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+//            }
+//        }
+//
+//        if rightIntArray1.count > 3 {
+//            if get4Concctivearray(inputArray: rightIntArray1).count > 3 {
+//                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: rightIntArray1))
+//            }
+//        }
+//
+//    }
+    
+//    func generateDiagonalArray(selectedSection:IndexPath) {
+//        var number:[[GamePattern]] = []
+//        for i in 0...selectedSection.section {
+//            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row + i)})
+//            number.append(coulm)
+//        }
+//        print("number == \(number)")
+//        var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 } ?? []
+//        var intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+//        print("intArray == \(intArray1)")
+//        if intArray1.count > 3 {
+//            if get4Concctivearray(inputArray: intArray1).count > 3 {
+//                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+//            }
+//        }
+//    }
+//    func generateTopToBottomDiagonalArray(selectedSection:IndexPath) {
+//        var number:[[GamePattern]] = []
+//        for i in 0...selectedSection.section {
+//            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == currentPlayer) && ($0.indexPath.row == selectedSection.row - i)})
+//            number.append(coulm)
+//        }
+//        print("number == \(number)")
+//        var arr:[GamePattern] = number.flatMap { $0 }.compactMap{ $0 } ?? []
+//        var intArray1:[Int] = arr.map({$0.indexPath.row}).sorted(by: {$0 < $1})
+//        print("intArray == \(intArray1)")
+//        if intArray1.count > 3 {
+//            if get4Concctivearray(inputArray: intArray1).count > 3 {
+//                isElementsConsicutive(inputArray: get4Concctivearray(inputArray: intArray1))
+//            }
+//        }
+//    }
     
     func generateLeftDiagonalArray(selectedSection:IndexPath) {
         var number:[[GamePattern]] = []

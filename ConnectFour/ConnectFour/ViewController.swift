@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.sendGameOverMessage = { [weak self] message in
             let alreatCOnr = UIAlertController(title: "Congratulation!!!", message: message, preferredStyle: .alert)
-            alreatCOnr.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            alreatCOnr.addAction(UIAlertAction(title: "Restart Game", style: .default, handler: { action in
                 //print("default")
                 self?.viewModel.selectedItems.removeAll()
                 self?.connectFourCollectionView.reloadData()
