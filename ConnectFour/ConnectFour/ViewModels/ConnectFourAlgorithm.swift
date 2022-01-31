@@ -38,12 +38,7 @@ extension ConnectFourAlgorithm {
     func generateDiagonalAlgorithm(selectedSection: IndexPath, selectedItems: [GamePattern], player: Player) -> Bool {
         var leftDiagonalArray:[[GamePattern]] = []
         var rightDiagonalNumber:[[GamePattern]] = []
-        
-        let totalRows = 6
-        let totalSections = 7
-//        let remainingRows = totalRows - selectedSection.row
-//        var remainingSections = totalSections - selectedSection.section
-//        
+
         //topLeft ->Bottom Right -> )C+ R+)
         for i in 0...4 {
             let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row + i)})
