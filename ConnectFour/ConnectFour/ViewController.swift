@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     lazy var connectFourCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS, left: ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS, bottom: ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS, right: ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor.white
@@ -70,8 +70,10 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let layout = connectFourCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        let height = (self.connectFourCollectionView.frame.size.height/6) - 30
-        let width = (self.connectFourCollectionView.frame.size.width/7) - 10
+        let insetsforHeight = CGFloat(viewModel.numberOfItemsInSection()) * ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS
+        let insetsforWidth = 2 * ConnectFourConstants.COLLECTION_VIEW_CELL_INSETS
+        let height = (self.connectFourCollectionView.frame.size.height/CGFloat(viewModel.numberOfItemsInSection())) - insetsforHeight
+        let width = (self.connectFourCollectionView.frame.size.width/CGFloat(viewModel.numberOfSections())) - insetsforWidth
         layout.itemSize = CGSize(width: width, height: height)
         connectFourCollectionView.collectionViewLayout = layout
     }
