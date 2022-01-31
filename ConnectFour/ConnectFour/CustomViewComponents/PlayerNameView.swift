@@ -43,12 +43,10 @@ class PlayerNameView: UIView {
     }
     
     private func baseStackView(){
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
-            stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
-            stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1),
-            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1)
-        ])
+        stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
+        stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
+        stackView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.50).isActive = true
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -148,6 +148,24 @@
 			path = CollectionViewDataSources;
 			sourceTree = "<group>";
 		};
+		B85C933927A78D240027EE3B /* CustomViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B884201427A04DD400E4D0AE /* PlayerNameView.swift */,
+				B877349427A1096F008252E7 /* PlayerColour.swift */,
+				B877349627A11F93008252E7 /* ResetButton.swift */,
+			);
+			path = CustomViewComponents;
+			sourceTree = "<group>";
+		};
+		B85C933A27A78D580027EE3B /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				B85C932227A18C5F0027EE3B /* MockApi.json */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		B8841FD627A0112600E4D0AE = {
 			isa = PBXGroup;
 			children = (
@@ -171,11 +189,12 @@
 		B8841FE127A0112600E4D0AE /* ConnectFour */ = {
 			isa = PBXGroup;
 			children = (
-				B85C932227A18C5F0027EE3B /* MockApi.json */,
+				B85C933927A78D240027EE3B /* CustomViewComponents */,
 				B85C931F27A18B150027EE3B /* ViewModels */,
 				B85C932427A18CE40027EE3B /* Models */,
 				B85C933527A6D7BD0027EE3B /* CollectionViewCells */,
 				B85C933627A6D7CF0027EE3B /* CollectionViewDataSources */,
+				B85C933A27A78D580027EE3B /* SupportingFiles */,
 				B8841FE227A0112600E4D0AE /* AppDelegate.swift */,
 				B8841FE427A0112600E4D0AE /* SceneDelegate.swift */,
 				B8841FE627A0112600E4D0AE /* ViewController.swift */,
@@ -184,9 +203,6 @@
 				B8841FEB27A0112A00E4D0AE /* Assets.xcassets */,
 				B8841FED27A0112A00E4D0AE /* LaunchScreen.storyboard */,
 				B8841FF027A0112A00E4D0AE /* Info.plist */,
-				B884201427A04DD400E4D0AE /* PlayerNameView.swift */,
-				B877349427A1096F008252E7 /* PlayerColour.swift */,
-				B877349627A11F93008252E7 /* ResetButton.swift */,
 			);
 			path = ConnectFour;
 			sourceTree = "<group>";

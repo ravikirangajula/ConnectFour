@@ -45,10 +45,7 @@ class ResetButton: UIView {
     }
     
     func roundButton() {
-        //roundView.layoutIfNeeded()
-       // self.layoutIfNeeded()
         roundView.layer.cornerRadius = roundView.frame.size.width/2
-
     }
 
     required init(coder aDecoder: NSCoder) {
