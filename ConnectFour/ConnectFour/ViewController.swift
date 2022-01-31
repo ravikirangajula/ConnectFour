@@ -55,14 +55,16 @@ class ViewController: UIViewController {
         setUpUI()
         initializeComponents()
         addViewsToStack()
-        viewModel = MainViewModel()
-        dataSource.viewModel?.setCurrentPlayer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         listenForDataSourceCallback()
         listenForPLayerChange()
+        /* Note: if we use tableview data source as dataSource object then need to implement this
+         dataSource.viewModel?.setCurrentPlayer()
+         */
+        viewModel.setCurrentPlayer()
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,8 +88,12 @@ extension ViewController {
     }
     
     private func initializeComponents() {
-        connectFourCollectionView.delegate = dataSource
-        connectFourCollectionView.dataSource = dataSource
+        /* Note: if we use tableview data source as dataSource object then need to implement this
+         connectFourCollectionView.delegate = dataSource
+         connectFourCollectionView.dataSource = dataSource
+        */
+        connectFourCollectionView.delegate = viewModel
+        connectFourCollectionView.dataSource = viewModel
         connectFourCollectionView.register(ConnectFourCollectionViewCell.self, forCellWithReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier)
     }
     
@@ -119,7 +125,7 @@ extension ViewController {
         
         let paddingView = UIView()
         stackView.addArrangedSubview(paddingView)
-
+        
         //Reset Button
         let bgView = ResetButton()
         bgView.tapOnReset = { [weak self] in
@@ -146,7 +152,10 @@ extension ViewController {
 extension ViewController {
     
     private func listenForPLayerChange() {
-        dataSource.sendBackPlayer = { [weak self] currentPlayer in
+        /* Note: if we use data source then need to implement this
+         dataSource.sendBackPlayer = { [weak self] currentPlayer in
+         } */
+        viewModel.playerChanged = { [weak self] currentPlayer in
             DispatchQueue.main.async {
                 if currentPlayer == .player1 {
                     self?.playerOneName.setStatus(isHidden: true)
@@ -158,8 +167,12 @@ extension ViewController {
             }
         }
     }
+    
     private func listenForDataSourceCallback() {
-        dataSource.sendBackGameOverMessage = { [weak self] message in
+        /* Note: if use data source then need to implement this
+         dataSource.sendBackGameOverMessage = { [weak self] message in
+         } */
+        viewModel.sendGameOverMessage = { [weak self] message in
             let alreatCOnr = UIAlertController(title: ConnectFourConstants.ALERT_TITLE, message: message, preferredStyle: .alert)
             alreatCOnr.addAction(UIAlertAction(title: ConnectFourConstants.ALERT_BUTTON_TITLE, style: .default, handler: { [weak self] action in
                 self?.resetAllData()
@@ -169,7 +182,10 @@ extension ViewController {
     }
     
     private func resetAllData() {
-        self.dataSource.viewModel?.selectedItems.removeAll()
+        /* Note: if use data source then need to implement this
+         self.dataSource.viewModel?.selectedItems.removeAll()
+         } */
+        self.viewModel.selectedItems.removeAll()
         self.connectFourCollectionView.reloadData()
     }
 }

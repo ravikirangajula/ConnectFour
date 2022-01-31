@@ -67,8 +67,9 @@ extension MainViewModel {
     func setSelectedItem(indexPath:IndexPath)  {
         let playerObj = GamePattern(player: currentPlayer, indexPath: indexPath)
         selectedItems.append(playerObj)
-        
-        //check for verticalArray
+        if selectedItems.count == 42 {
+            sendGameOverMessage?("Game Over")
+        }
         if connectFourAlgorithmModel.generateVerticalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
             sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE) \(getCurrentPlayerName())")
         } else if connectFourAlgorithmModel.generateHorizontalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
@@ -115,5 +116,45 @@ extension MainViewModel {
     
     func numberOfItemsInSection() -> Int {
         return 6
+    }
+}
+
+extension MainViewModel: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return numberOfItemsInSection()
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return numberOfSections()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConnectFourCollectionViewCell.cellIdentifier, for: indexPath) as? ConnectFourCollectionViewCell else { return UICollectionViewCell() }
+        cell.setUpCell()
+        return cell
+    }
+}
+
+extension MainViewModel: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        setCurrentPlayer()
+        collectionView.deselectItem(at: indexPath, animated: false)
+        setSelectedItem(indexPath: getIndexToStore(indexPath: indexPath))
+        collectionView.selectItem(at: getIndexToStore(indexPath: indexPath), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
+        guard let cell = collectionView.cellForItem(at: getIndexToStore(indexPath: indexPath)) as? ConnectFourCollectionViewCell else { return }
+        cell.setUpCell(color: selectedPlayerColor())
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
+            return false
+        }
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        return self.canSelectItemAtIndex(indexPath: indexPath)
     }
 }
