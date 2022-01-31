@@ -22,9 +22,10 @@ class PlayerColour: UIView {
         self.addSubview(roundView)
         setUpView()
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        roundButton()
+        applyRoundCorners()
     }
 
     func setUpView() {
@@ -34,12 +35,11 @@ class PlayerColour: UIView {
         roundView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.50).isActive = true
     }
     
-    func roundButton() {
+    func applyRoundCorners() {
         roundView.layoutIfNeeded()
         self.layoutIfNeeded()
         roundView.layer.cornerRadius = roundView.frame.size.width/2
         roundView.clipsToBounds = true
-
     }
     
     func setUPUI(color:UIColor) {

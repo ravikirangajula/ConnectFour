@@ -11,14 +11,20 @@ import UIKit
 
 class ConnectFourCollectionDataSource: NSObject {
   
-    var sections = 7
-    var itemsInSection = 6
     var viewModel: MainViewModel?
+    var sendBackGameOverMessage:((_ message:String) -> ())?
+    var sendBackPlayer:((_ player:Player) -> ())?
 
 
     init(model:MainViewModel?) {
       self.viewModel = model
       super.init()
+      viewModel?.sendGameOverMessage = {[weak self] message in
+        self?.sendBackGameOverMessage?(message)
+     }
+        viewModel?.playerChanged = {[weak self] currentPlayer in
+          self?.sendBackPlayer?(currentPlayer)
+       }
     }
     
     convenience override init() {
@@ -29,11 +35,11 @@ class ConnectFourCollectionDataSource: NSObject {
 extension ConnectFourCollectionDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemsInSection
+        return viewModel?.numberOfItemsInSection() ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections
+        return viewModel?.numberOfSections() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -12,29 +12,32 @@ struct GamePattern {
 }
 
 class MainViewModel: NSObject {
-    
+    //callBack method
     var sendGameOverMessage:((_ message:String) -> ())?
-    
-    var connectFourAlgorithmModel: ConnectFourAlgorithm = {
+    var playerChanged:((_ currentPlayer:Player) -> ())?
+
+    lazy var connectFourAlgorithmModel: ConnectFourAlgorithm = {
         return ConnectFourAlgorithm()
     }()
     
-    var dataFetcherModel: DataFetcher?
+    lazy var dataFetcherModel: DataFetcher = {
+        return DataFetcher()
+    }()
     
     var currentPlayer:Player = .player1
     var selectedItems:[GamePattern] = []
     
     override init() {
         super.init()
-        dataFetcherModel = DataFetcher()
     }
-    
 }
 
+//MARK: Public Methods
 extension MainViewModel {
     
     func setCurrentPlayer() {
         currentPlayer = currentPlayer == .player1 ? .player2 : .player1
+        playerChanged?(currentPlayer)
     }
     
     func selectedPlayerColor() -> UIColor {
@@ -47,18 +50,18 @@ extension MainViewModel {
     }
     
     func getFirstPlayerName() -> String {
-        return dataFetcherModel?.resObject?.first?.name1 ?? ""
+        return dataFetcherModel.resObject?.first?.name1 ?? ""
     }
     
     func playerOneColor() -> String {
-        return dataFetcherModel?.resObject?.first?.color1 ?? ""
+        return dataFetcherModel.resObject?.first?.color1 ?? ""
     }
     func playerTwoColor() -> String {
-        return dataFetcherModel?.resObject?.first?.color2 ?? ""
+        return dataFetcherModel.resObject?.first?.color2 ?? ""
     }
     
     func getSecondPlayerName() -> String {
-        return dataFetcherModel?.resObject?.first?.name2 ?? ""
+        return dataFetcherModel.resObject?.first?.name2 ?? ""
     }
     
     func setSelectedItem(indexPath:IndexPath)  {
@@ -67,28 +70,50 @@ extension MainViewModel {
         
         //check for verticalArray
         if connectFourAlgorithmModel.generateVerticalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
-            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE)\(currentPlayer)")
+            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE) \(getCurrentPlayerName())")
         } else if connectFourAlgorithmModel.generateHorizontalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) {
-            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE)\(currentPlayer)")
+            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE) \(getCurrentPlayerName())")
         } else if connectFourAlgorithmModel.generateDiagonalAlgorithm(selectedSection: indexPath, selectedItems: selectedItems, player: currentPlayer) == true {
-            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE)\(currentPlayer)")
+            sendGameOverMessage?("\(ConnectFourConstants.ALERT_MESSAGE) \(getCurrentPlayerName())")
         }
     }
     
-    func getSelectedItemsCount(indexPath:IndexPath) -> Int {
-        let items = selectedItems.filter({$0.indexPath.section == indexPath.section})
-        return items.count
-    }
+
     
     func getIndexToStore(indexPath:IndexPath) -> IndexPath {
-        return IndexPath(item: (6 - getSelectedItemsCount(indexPath: indexPath)), section: indexPath.section)
+        return IndexPath(item: (numberOfItemsInSection() - getSelectedItemsCount(indexPath: indexPath)), section: indexPath.section)
     }
     
     func canSelectItemAtIndex(indexPath:IndexPath) -> Bool {
-        if getSelectedItemsCount(indexPath: indexPath) >= 6 || selectedItems.contains(where: {$0.indexPath == indexPath})  {
+        if getSelectedItemsCount(indexPath: indexPath) >= numberOfItemsInSection() || selectedItems.contains(where: {$0.indexPath == indexPath})  {
             return false
         }
         return true
     }
     
+}
+
+//MARK: Private methods
+extension MainViewModel {
+    
+    private func getSelectedItemsCount(indexPath:IndexPath) -> Int {
+        let items = selectedItems.filter({$0.indexPath.section == indexPath.section})
+        return items.count
+    }
+    
+    private func getCurrentPlayerName() -> String {
+        return currentPlayer == .player1 ? getFirstPlayerName() : getSecondPlayerName()
+    }
+    
+}
+
+//MARK: Collection Data Source inputs
+extension MainViewModel {
+    func numberOfSections() -> Int {
+        return 7
+    }
+    
+    func numberOfItemsInSection() -> Int {
+        return 6
+    }
 }

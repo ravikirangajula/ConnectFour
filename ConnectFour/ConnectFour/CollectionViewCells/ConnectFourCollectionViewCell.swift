@@ -40,7 +40,7 @@ class ConnectFourCollectionViewCell: UICollectionViewCell {
         circleView.layer.cornerRadius = circleView.frame.size.width/2
     }
 
-    func setUpCell(color:UIColor = .cyan) {
+    func setUpCell(color:UIColor = #colorLiteral(red: 0.1921568627, green: 0.5843137255, blue: 0.6196078431, alpha: 1)) {
         circleView.backgroundColor = color
     }
     

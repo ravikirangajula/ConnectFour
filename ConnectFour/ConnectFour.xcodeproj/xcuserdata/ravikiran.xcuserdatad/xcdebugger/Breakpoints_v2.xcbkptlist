@@ -7,33 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "64633097-7D54-4D89-8C6B-AA84DD196AC5"
+            uuid = "4172D126-2394-43B8-B03B-D1F39D75F8CE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ConnectFour/ViewModels/MainViewModel.swift"
+            filePath = "ConnectFour/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "setSelectedItem(indexPath:)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "addViewsToStack()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF217845-D571-495B-8BE3-2ECFC48C1D1C"
+            uuid = "2B61E0AB-2258-4D68-AE8F-08B94A929296"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ConnectFour/ViewModels/ConnectFourAlgorithm.swift"
+            filePath = "ConnectFour/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "generateDiagonalAlgorithm(selectedSection:selectedItems:player:)"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "listenForPLayerChange()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2B61E0AB-2258-4D68-AE8F-08B94A929296 - aefae4c8e359bb95"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ConnectFour.Player) -&gt; () in ConnectFour.ViewController.listenForPLayerChange() -&gt; ()"
+                  moduleName = "ConnectFour"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ravikiran/ConnectFourApp/ConnectFour/ConnectFour/ConnectFour/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "162">
+               </Location>
+               <Location
+                  uuid = "2B61E0AB-2258-4D68-AE8F-08B94A929296 - e3eca38c77fc1c2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (ConnectFour.Player) -&gt; () in ConnectFour.ViewController.listenForPLayerChange() -&gt; ()"
+                  moduleName = "ConnectFour"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ravikiran/ConnectFourApp/ConnectFour/ConnectFour/ConnectFour/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "99">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
