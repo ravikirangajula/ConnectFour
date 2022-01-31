@@ -41,39 +41,31 @@ extension ConnectFourAlgorithm {
         
         let totalRows = 6
         let totalSections = 7
-        let remainingRows = totalRows - selectedSection.row
-        var remainingSections = totalSections - selectedSection.section
-        
-        //bottomleft
-        if remainingRows != 0 {
-            for i in 0...remainingRows {
-                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row + i)})
-                leftDiagonalArray.append(coulm)
-            }
+//        let remainingRows = totalRows - selectedSection.row
+//        var remainingSections = totalSections - selectedSection.section
+//        
+        //topLeft ->Bottom Right -> )C+ R+)
+        for i in 0...4 {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row + i)})
+            leftDiagonalArray.append(coulm)
         }
         
-        //topLeft
-        if remainingSections != totalSections {
-            remainingSections = remainingSections == 0 ? totalSections : remainingSections
-            for i in 0...(remainingSections + 1) {
-                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row - i)})
-                leftDiagonalArray.append(coulm)
-            }
+        //BottomRight -> Top Left ->(c_ R_)
+        for i in 0...4 {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row - i)})
+            leftDiagonalArray.append(coulm)
         }
         
-        //bottomright
-        for i in 0...remainingRows {
+        //topRight -> bottom left -> (c_ r+)
+        for i in 0...4 {
             let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section - i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row + i)})
             rightDiagonalNumber.append(coulm)
         }
         
-        //topRight
-        if remainingSections != totalSections {
-            remainingSections = remainingSections == 0 ? totalSections : remainingSections
-            for i in 0...remainingSections {
-                let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row - i)})
-                rightDiagonalNumber.append(coulm)
-            }
+        //bottonLeft -> topRight -> forward direction (C+ R-)
+        for i in 0...4 {
+            let coulm = selectedItems.filter({($0.indexPath.section == selectedSection.section + i) && ($0.player == player) && ($0.indexPath.row == selectedSection.row - i)})
+            rightDiagonalNumber.append(coulm)
         }
         
         //leftIntArray

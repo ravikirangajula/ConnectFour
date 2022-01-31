@@ -15,6 +15,8 @@
 		B85C933127A6D3690027EE3B /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C933027A6D3690027EE3B /* DataFetcher.swift */; };
 		B85C933427A6D4EE0027EE3B /* ConnectFourConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C933327A6D4EE0027EE3B /* ConnectFourConstants.swift */; };
 		B85C933827A6D8500027EE3B /* ConnectFourCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C933727A6D8500027EE3B /* ConnectFourCollectionDataSource.swift */; };
+		B85C933C27A799300027EE3B /* MainViewModleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C933B27A799300027EE3B /* MainViewModleTests.swift */; };
+		B85C933E27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85C933D27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift */; };
 		B877349527A1096F008252E7 /* PlayerColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877349427A1096F008252E7 /* PlayerColour.swift */; };
 		B877349727A11F93008252E7 /* ResetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B877349627A11F93008252E7 /* ResetButton.swift */; };
 		B8841FE327A0112600E4D0AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8841FE227A0112600E4D0AE /* AppDelegate.swift */; };
@@ -54,6 +56,8 @@
 		B85C933027A6D3690027EE3B /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		B85C933327A6D4EE0027EE3B /* ConnectFourConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourConstants.swift; sourceTree = "<group>"; };
 		B85C933727A6D8500027EE3B /* ConnectFourCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourCollectionDataSource.swift; sourceTree = "<group>"; };
+		B85C933B27A799300027EE3B /* MainViewModleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModleTests.swift; sourceTree = "<group>"; };
+		B85C933D27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourAlgorithmTests.swift; sourceTree = "<group>"; };
 		B877349427A1096F008252E7 /* PlayerColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerColour.swift; sourceTree = "<group>"; };
 		B877349627A11F93008252E7 /* ResetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetButton.swift; sourceTree = "<group>"; };
 		B8841FDF27A0112600E4D0AE /* ConnectFour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectFour.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +216,8 @@
 			children = (
 				B8841FF927A0112B00E4D0AE /* ConnectFourTests.swift */,
 				B8841FFB27A0112B00E4D0AE /* Info.plist */,
+				B85C933B27A799300027EE3B /* MainViewModleTests.swift */,
+				B85C933D27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift */,
 			);
 			path = ConnectFourTests;
 			sourceTree = "<group>";
@@ -377,6 +383,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8841FFA27A0112B00E4D0AE /* ConnectFourTests.swift in Sources */,
+				B85C933E27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift in Sources */,
+				B85C933C27A799300027EE3B /* MainViewModleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
