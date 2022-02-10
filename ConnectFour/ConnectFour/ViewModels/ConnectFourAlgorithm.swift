@@ -8,7 +8,6 @@
 import Foundation
 
 class ConnectFourAlgorithm: NSObject {
-    
     override init() {
         super.init()
     }
