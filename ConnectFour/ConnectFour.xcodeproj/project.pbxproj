@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		B884200527A0112B00E4D0AE /* ConnectFourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884200427A0112B00E4D0AE /* ConnectFourUITests.swift */; };
 		B884201327A0163800E4D0AE /* ConnectFourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884201227A0163800E4D0AE /* ConnectFourCollectionViewCell.swift */; };
 		B884201527A04DD400E4D0AE /* PlayerNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B884201427A04DD400E4D0AE /* PlayerNameView.swift */; };
+		B8D09AE327B508EB00FF4E08 /* ConnectFourStagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D09AE227B508EB00FF4E08 /* ConnectFourStagingTests.swift */; };
 		E438DCAAC09421FC544FE3C9 /* Pods_ConnectFour.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3920C1FCA8B8733059422C4A /* Pods_ConnectFour.framework */; };
 		FB55EE1BA613631D7F414247 /* Pods_ConnectFourTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60304F088D64099F4C0C2EBD /* Pods_ConnectFourTests.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		B884200627A0112B00E4D0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B884201227A0163800E4D0AE /* ConnectFourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourCollectionViewCell.swift; sourceTree = "<group>"; };
 		B884201427A04DD400E4D0AE /* PlayerNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameView.swift; sourceTree = "<group>"; };
+		B8D09AE227B508EB00FF4E08 /* ConnectFourStagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourStagingTests.swift; sourceTree = "<group>"; };
 		E134F0262AB3E18BB1C9C0C6 /* Pods-ConnectFour-ConnectFourUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectFour-ConnectFourUITests.release.xcconfig"; path = "Target Support Files/Pods-ConnectFour-ConnectFourUITests/Pods-ConnectFour-ConnectFourUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +129,6 @@
 				9015A39050D52A3C7992C1CC /* Pods-ConnectFourTests.debug.xcconfig */,
 				9629CA6A07BF70467A303498 /* Pods-ConnectFourTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -259,6 +260,7 @@
 				B8841FFB27A0112B00E4D0AE /* Info.plist */,
 				B85C933B27A799300027EE3B /* MainViewModleTests.swift */,
 				B85C933D27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift */,
+				B8D09AE227B508EB00FF4E08 /* ConnectFourStagingTests.swift */,
 			);
 			path = ConnectFourTests;
 			sourceTree = "<group>";
@@ -533,6 +535,7 @@
 			files = (
 				B8841FFA27A0112B00E4D0AE /* ConnectFourTests.swift in Sources */,
 				B85C933E27A79DCF0027EE3B /* ConnectFourAlgorithmTests.swift in Sources */,
+				B8D09AE327B508EB00FF4E08 /* ConnectFourStagingTests.swift in Sources */,
 				B85C933C27A799300027EE3B /* MainViewModleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
