@@ -1,0 +1,6 @@
+framework module Pods_ConnectFour_ConnectFourUITests {
+  umbrella header "Pods-ConnectFour-ConnectFourUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
