@@ -21,6 +21,11 @@ class ConnectFourStagingTests: XCTestCase {
         let name = "testing"
         XCTAssertEqual(name, "testing")
     }
+    
+    func testWithPeiChin() {
+        let name = "testing"
+        XCTAssertEqual(name, "testing")
+    }
 
 
     func testPerformanceExample() throws {
